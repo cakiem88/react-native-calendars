@@ -4,7 +4,8 @@ import {
   View,
   StyleSheet
 } from 'react-native';
-import {Agenda} from 'react-native-calendars';
+import {Agenda} from '../react-native-calendars';
+// import {Agenda} from '../../../src/agenda';
 
 export default class AgendaScreen extends Component {
   constructor(props) {

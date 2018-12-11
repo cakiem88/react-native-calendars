@@ -266,7 +266,7 @@ The loading indicator next to month name will be displayed if `<Calendar />` has
   style={{
     borderWidth: 1,
     borderColor: 'gray',
-    height: 350
+    height: 380
   }}
   // Specify theme properties to override specific styles for calendar parts. Default = {}
   theme={{
