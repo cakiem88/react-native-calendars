@@ -41,11 +41,12 @@ class Day extends Component {
   }
 
   render() {
+    const isHighlightWeekend = this.props.isHighlightWeekend;
     const containerStyle = [this.style.base];
-    const textStyle = [this.style.text];
-    const lunarTextStyle = [textStyle, this.style.lunarText, {marginTop: 0}];
+    let textStyle = [this.style.text];
+    let lunarTextStyle = [textStyle, this.style.lunarText, {marginTop: 0}];
     const dotStyle = [this.style.dot];
-        
+
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
       marking = {
@@ -79,11 +80,18 @@ class Day extends Component {
     let lunarStr = '';
     if (lunarDay) {
       lunarStr = lunarDay.day==1?`${lunarDay.day}/${lunarDay.month+1}`:lunarDay.day;
+      if (lunarDay.day == 1) {
+        lunarTextStyle.push({color: 'red'});
+      }
     }
-     
+    if (isHighlightWeekend) {
+      textStyle.push({color: 'red'});
+      lunarTextStyle.push({color: 'red'});      
+    }
+
     return (
       <TouchableOpacity
-        style={[...containerStyle]}
+        style={containerStyle}
         onPress={this.onDayPress}
         onLongPress={this.onDayLongPress}
         activeOpacity={marking.activeOpacity}

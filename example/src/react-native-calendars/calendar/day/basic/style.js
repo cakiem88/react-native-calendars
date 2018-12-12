@@ -22,7 +22,7 @@ export default function styleConstructor(theme={}) {
     lunarText: {
       fontWeight: '300',
       fontSize: appStyle.textLunarDayFontSize,      
-    },
+    },    
     alignedText: {
       marginTop: Platform.OS === 'android' ? 4 : 6
     },

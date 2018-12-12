@@ -38,6 +38,7 @@ export default class CalendarsScreen extends Component {
             '2012-05-26': {marked: true},
             '2012-05-27': {disabled: true, activeOpacity: 0}
           }}
+          isHighlightWeekend={true}
           // disabledByDefault={true}
           hideArrows={true}
         />

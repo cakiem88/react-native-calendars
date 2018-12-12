@@ -76,7 +76,8 @@ class Calendar extends Component {
     // Handler which gets executed when press arrow icon left. It receive a callback can go back month
     onPressArrowLeft: PropTypes.func,
     // Handler which gets executed when press arrow icon left. It receive a callback can go next month
-    onPressArrowRight: PropTypes.func
+    onPressArrowRight: PropTypes.func,
+    isHighlightWeekend: PropTypes.bool
   };
 
   constructor(props) {
@@ -156,7 +157,8 @@ class Calendar extends Component {
 
   renderDay(day, id) {
     const minDate = parseDate(this.props.minDate);
-    const maxDate = parseDate(this.props.maxDate);
+    const maxDate = parseDate(this.props.maxDate);    
+    const isHighlightWeekend = this.props.isHighlightWeekend&&(day.getDay() == 0||day.getDay()== 6);
     let state = '';
     if (this.props.disabledByDefault) {
       state = 'disabled';
@@ -185,6 +187,7 @@ class Calendar extends Component {
           date={xdateToData(day)}
           marking={this.getDateMarking(day)}
           lunarDay={lunarday}
+          isHighlightWeekend= {isHighlightWeekend}
         >
           {date}
         </DayComp>
@@ -270,6 +273,7 @@ class Calendar extends Component {
           weekNumbers={this.props.showWeekNumbers}
           onPressArrowLeft={this.props.onPressArrowLeft}
           onPressArrowRight={this.props.onPressArrowRight}
+          isHighlightWeekend= {this.props.isHighlightWeekend}
         />
         <View style={this.style.monthView}>{weeks}</View>
       </View>);

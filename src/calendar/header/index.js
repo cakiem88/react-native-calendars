@@ -22,7 +22,8 @@ class CalendarHeader extends Component {
     hideDayNames: PropTypes.bool,
     weekNumbers: PropTypes.bool,
     onPressArrowLeft: PropTypes.func,
-    onPressArrowRight: PropTypes.func
+    onPressArrowRight: PropTypes.func,
+    isHighlightWeekend: PropTypes.bool
   };
 
   static defaultProps = {
@@ -36,6 +37,7 @@ class CalendarHeader extends Component {
     this.substractMonth = this.substractMonth.bind(this);
     this.onPressLeft = this.onPressLeft.bind(this);
     this.onPressRight = this.onPressRight.bind(this);
+    this.isHighlight = this.isHighlight.bind(this);
   }
 
   addMonth() {
@@ -69,6 +71,17 @@ class CalendarHeader extends Component {
     }
     return this.substractMonth();
   }
+  isHighlight(idx) {
+    if (this.props.isHighlightWeekend) {
+      if (this.props.firstDay == 0) {
+        return idx == 0||idx == 6;
+      } else if (this.props.firstDay == 1) {
+        return idx == 5 || idx == 6;
+      }
+      return false;
+    }
+    return false;
+  }
 
   onPressRight() {
     const {onPressArrowRight} = this.props;
@@ -78,7 +91,7 @@ class CalendarHeader extends Component {
     return this.addMonth();
   }
 
-  render() {
+  render() {    
     let leftArrow = <View />;
     let rightArrow = <View />;
     let weekDaysNames = weekDayNames(this.props.firstDay);
@@ -118,6 +131,7 @@ class CalendarHeader extends Component {
     if (this.props.showIndicator) {
       indicator = <ActivityIndicator />;
     }
+    
     return (
       <View>
         <View style={this.style.header}>
@@ -134,9 +148,15 @@ class CalendarHeader extends Component {
           !this.props.hideDayNames &&
           <View style={this.style.week}>
             {this.props.weekNumbers && <Text allowFontScaling={false} style={this.style.dayHeader}></Text>}
-            {weekDaysNames.map((day, idx) => (
-              <Text allowFontScaling={false} key={idx} accessible={false} style={this.style.dayHeader} numberOfLines={1} importantForAccessibility='no'>{day}</Text>
-            ))}
+            {weekDaysNames.map((day, idx) => {
+              const isHighlight = this.isHighlight(idx);
+              if (!isHighlight) {
+                return <Text allowFontScaling={false} key={idx} accessible={false} style={this.style.dayHeader} numberOfLines={1} importantForAccessibility='no'>{day}</Text>;
+              } else {
+                return <Text allowFontScaling={false} key={idx} accessible={false} style={{...this.style.dayHeader, color: 'red'}} numberOfLines={1} importantForAccessibility='no'>{day}</Text>;
+              }
+              
+            })}
           </View>
         }
       </View>

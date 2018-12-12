@@ -16,7 +16,7 @@ import ReservationsList from './reservation-list';
 import styleConstructor from './style';
 import { VelocityTracker } from '../input';
 
-const HEADER_HEIGHT = 126;
+const HEADER_HEIGHT = 118;
 const KNOB_HEIGHT = 48;
 
 //Fallback when RN version is < 0.44
@@ -120,7 +120,7 @@ export default class AgendaView extends Component {
   }
 
   calendarOffset() {
-    return 100 - (this.viewHeight / 2);
+    return 80 - (this.viewHeight / 2);
   }
 
   initialScrollPadPosition() {
