@@ -42,6 +42,7 @@ class Day extends Component {
 
   render() {
     const isHighlightWeekend = this.props.isHighlightWeekend;
+    
     const containerStyle = [this.style.base];
     let textStyle = [this.style.text];
     let lunarTextStyle = [textStyle, this.style.lunarText, {marginTop: 0}];
@@ -76,17 +77,29 @@ class Day extends Component {
       containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
     }
+    let colorWeekend = textStyle.color;
+    if (this.props.weekendHighlightColor) {
+      colorWeekend = this.props.weekendHighlightColor;
+    }
     let lunarDay = this.props.lunarDay;
     let lunarStr = '';
     if (lunarDay) {
       lunarStr = lunarDay.day==1?`${lunarDay.day}/${lunarDay.month+1}`:lunarDay.day;
       if (lunarDay.day == 1) {
-        lunarTextStyle.push({color: 'red'});
+        lunarTextStyle.push({color: colorWeekend});
       }
     }
     if (isHighlightWeekend) {
-      textStyle.push({color: 'red'});
-      lunarTextStyle.push({color: 'red'});      
+      if (!isDisabled) {
+        textStyle.push({color: colorWeekend});
+        textStyle.push({opacity: 0.8});
+        lunarTextStyle.push({color: colorWeekend});
+        lunarTextStyle.push({opacity: 0.8});
+      } else {
+        textStyle.push({color: colorWeekend});
+        lunarTextStyle.push({color: colorWeekend});
+      }
+      
     }
 
     return (

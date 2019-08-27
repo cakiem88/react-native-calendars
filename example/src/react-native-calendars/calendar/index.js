@@ -77,7 +77,8 @@ class Calendar extends Component {
     onPressArrowLeft: PropTypes.func,
     // Handler which gets executed when press arrow icon left. It receive a callback can go next month
     onPressArrowRight: PropTypes.func,
-    isHighlightWeekend: PropTypes.bool
+    isHighlightWeekend: PropTypes.bool,
+    weekendHighlightColor: PropTypes.string,
   };
 
   constructor(props) {
@@ -188,6 +189,7 @@ class Calendar extends Component {
           marking={this.getDateMarking(day)}
           lunarDay={lunarday}
           isHighlightWeekend= {isHighlightWeekend}
+          weekendHighlightColor={this.props.weekendHighlightColor}
         >
           {date}
         </DayComp>

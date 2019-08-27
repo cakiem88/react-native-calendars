@@ -23,7 +23,8 @@ class CalendarHeader extends Component {
     weekNumbers: PropTypes.bool,
     onPressArrowLeft: PropTypes.func,
     onPressArrowRight: PropTypes.func,
-    isHighlightWeekend: PropTypes.bool
+    isHighlightWeekend: PropTypes.bool,
+    weekendHighlightColor: PropTypes.string,
   };
 
   static defaultProps = {
@@ -131,7 +132,12 @@ class CalendarHeader extends Component {
     if (this.props.showIndicator) {
       indicator = <ActivityIndicator />;
     }
-    
+    let headerColor = this.style.dayHeader.color;
+    if (this.props.isHighlightWeekend) {
+      if (this.props.weekendHighlightColor) {
+        headerColor = this.props.weekendHighlightColor;
+      }
+    }
     return (
       <View>
         <View style={this.style.header}>
@@ -153,7 +159,7 @@ class CalendarHeader extends Component {
               if (!isHighlight) {
                 return <Text allowFontScaling={false} key={idx} accessible={false} style={this.style.dayHeader} numberOfLines={1} importantForAccessibility='no'>{day}</Text>;
               } else {
-                return <Text allowFontScaling={false} key={idx} accessible={false} style={{...this.style.dayHeader, color: 'red'}} numberOfLines={1} importantForAccessibility='no'>{day}</Text>;
+                return <Text allowFontScaling={false} key={idx} accessible={false} style={{...this.style.dayHeader, color: headerColor}} numberOfLines={1} importantForAccessibility='no'>{day}</Text>;
               }
               
             })}
