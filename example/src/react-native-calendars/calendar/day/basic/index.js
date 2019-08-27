@@ -101,7 +101,6 @@ class Day extends Component {
         textStyle.push({opacity: 1});
         lunarTextStyle.push({opacity: 1});
       }
-      
     }
 
     return (

@@ -90,16 +90,17 @@ class Day extends Component {
       }
     }
     if (isHighlightWeekend) {
-      if (!isDisabled) {
+      if (isDisabled) {
         textStyle.push({color: colorWeekend});
-        textStyle.push({opacity: 0.8});
+        textStyle.push({opacity: 0.5});
         lunarTextStyle.push({color: colorWeekend});
-        lunarTextStyle.push({opacity: 0.8});
+        lunarTextStyle.push({opacity: 0.5});
       } else {
         textStyle.push({color: colorWeekend});
         lunarTextStyle.push({color: colorWeekend});
-      }
-      
+        textStyle.push({opacity: 1});
+        lunarTextStyle.push({opacity: 1});
+      }      
     }
 
     return (
